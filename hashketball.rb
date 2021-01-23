@@ -1,4 +1,6 @@
 # Write your code below game_hash
+require 'pry'
+
 def game_hash
   {
     home: {
@@ -126,4 +128,95 @@ def game_hash
   }
 end
 
-# Write code here
+# Both home and away teams
+def all_players
+all_players = game_hash[:home][:players].concat(game_hash[:away][:players])
+end
+
+
+#searches players for points scored
+def num_points_scored player_name
+  all_players.each do |player|
+      if player[:player_name] == player_name
+        return player[:points]
+      end
+    end
+end
+
+def shoe_size player_name
+  all_players.each do |player|
+      if player[:player_name] == player_name
+        return player[:shoe]
+      end
+    end
+end
+
+def team_colors team
+if team == game_hash[:home][:team_name] 
+  return game_hash[:home][:colors]
+else
+  return game_hash[:away][:colors]
+end
+end
+
+def team_names 
+team_names = []
+team_names << brookly_nets 
+team_names << game_hash[:away][:team_name] 
+team_names
+end 
+
+def brookly_nets 
+  game_hash[:home][:team_name]
+end
+
+def charlotte_hornets
+  game_hash[:away][:team_name]
+end 
+
+def player_numbers pn_param 
+  numbers = []
+  game_hash.each do |team, team_info|
+    if team_info[:team_name] == pn_param 
+     team_info.each do |roster, player|
+      if roster == :players
+        player.each do |stats|
+          numbers.push(stats[:number])
+        end 
+       end
+      end
+    end
+  end
+  numbers   
+end
+
+
+def player_stats player_param
+all_players.each do |players|
+  if players[:player_name] == player_param
+    return players
+  end
+end
+end
+
+def big_shoe_rebounds
+  wink_wink = 0
+  big_shoes = 0
+  big_feet = wink_wink
+  all_players.each do |player|
+  if player[:shoe] > big_shoes
+        big_shoes = player[:shoe]
+        big_feet = player[:rebounds]
+      end
+    end
+    big_feet
+end 
+
+
+
+
+
+
+
+
+
